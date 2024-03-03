@@ -8,5 +8,5 @@
 <h2>something</h2>
 
 <div class="grid place-content-center">
-    <QuestionCard id={data.id} question={data.question} lang={data.lang}/>
+    <QuestionCard data={data} />
 </div>
