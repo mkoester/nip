@@ -37,22 +37,22 @@ You can preview the production build with `pnpm preview`.
 
 ### [Nobody is perfect](https://www.ravensburger.de/de-DE/pdp/26845) - Ein Spiel ab 14 Jahren, (offline) für 3-10 Spieler, von **Ravensburger**
 
-Wer weiß schon, was mit Servitut gemeint ist und was ein Mann, der mit Nachnamen Cohen heißt, in Israel nicht tun darf? Wer die glaubwürdigsten Antworten erfindet und damit seine Mitspieler überzeugt, gewinnt!
+> Wer weiß schon, was mit Servitut gemeint ist und was ein Mann, der mit Nachnamen Cohen heißt, in Israel nicht tun darf? Wer die glaubwürdigsten Antworten erfindet und damit seine Mitspieler überzeugt, gewinnt!
 
-Wahrheit oder Unsinn? Spinnt unglaubliche Geschichten glaubhaft weiter und erfindet die überzeugendsten Antworten auf verrückte Fragen.
+> Wahrheit oder Unsinn? Spinnt unglaubliche Geschichten glaubhaft weiter und erfindet die überzeugendsten Antworten auf verrückte Fragen.
 
-Nichts muss stimmen! Wichtig ist nur, dass ihr möglichst viele Mitspieler davon überzeugt, dass eure Antwort die einzig wahre ist.
-Wer überzeugt, punktet. Und wer zugleich auch noch auf die richtige Antwort tippt, punktet gleich noch einmal.
-Merkt euch also: Wer besser spinnt, gewinnt!
+> Nichts muss stimmen! Wichtig ist nur, dass ihr möglichst viele Mitspieler davon überzeugt, dass eure Antwort die einzig wahre ist.
+> Wer überzeugt, punktet. Und wer zugleich auch noch auf die richtige Antwort tippt, punktet gleich noch einmal.
+> Merkt euch also: Wer besser spinnt, gewinnt!
 
 ### Aus der [Spielanleitung](https://www.ravensburger.de/spieleanleitungen/ecm/Spielanleitungen/26845%20Anl%202051662.pdf)
 
-Jetzt ist eure Kreativität gefragt! Erfindet bei den blauen Karten („Kuriositäten“) möglichst kreative
-Antworten und versucht bei den rosa Karten („Begriffe“) eure erfundene Antwort so zu formulieren,
-als ob sie aus einem Lexikon oder Wörterbuch stammen würde. Je überzeugender eure Antwort
-ausfällt, umso mehr Mitspieler werden darauf hereinfallen.
+> Jetzt ist eure Kreativität gefragt! Erfindet bei den blauen Karten („Kuriositäten“) möglichst kreative
+> Antworten und versucht bei den rosa Karten („Begriffe“) eure erfundene Antwort so zu formulieren,
+> als ob sie aus einem Lexikon oder Wörterbuch stammen würde. Je überzeugender eure Antwort
+> ausfällt, umso mehr Mitspieler werden darauf hereinfallen.
 
-Wichtig: Wer ausnahmsweise die richtige Antwort kennt, schreibt natürlich trotzdem ein Lügenmärchen auf – und hofft, damit die Mitspieler aufs Glatteis zu führen. 
+> Wichtig: Wer ausnahmsweise die richtige Antwort kennt, schreibt natürlich trotzdem ein Lügenmärchen auf – und hofft, damit die Mitspieler aufs Glatteis zu führen. 
 
 ### Disclaimer
 
