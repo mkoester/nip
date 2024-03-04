@@ -2,7 +2,15 @@
 
 - [ ] allow for writing answers
 - [ ] display answers
+- [ ] vote on answer
+- [ ] offer two options when submitting answer or vote
+  - [ ] finish round early (as soon as every participant in a game submitted, go to next stage)
+  - [ ] wait for defined period of time
 - [ ] create / edit user profile (via invitation only)
+- [ ] create game
+  - [ ] add participants
+  - [ ] set rules
+    - [ ] time period per stage (writing answer, vote)
 - [ ] database
   - [ ] users
   - [ ] games
@@ -16,3 +24,8 @@
 - [ ] overall statistics (similar to the ones per game)
 - [ ] allow for adding questions and answers to the pool
   - [ ] mark the author
+- [ ] support bulk upload of questions
+  - [ ] cvs?
+  - [ ] directly via SQL
+  - [ ] add user `admin` with id=0, use as author of bulk upload if no explicit user is mentioned
+- [ ] proper logic for picking next question (making use of tracking views)
