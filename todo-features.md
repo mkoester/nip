@@ -12,6 +12,8 @@
   - [ ] set rules
     - [ ] time period per stage (writing answer, vote)
 - [ ] database
+  - [ ] set up sqlite with SvelteKit
+    - [ ] using environments (`dev` + `prod`)
   - [ ] users
   - [ ] games
   - [ ] user participation
