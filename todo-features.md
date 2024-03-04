@@ -2,6 +2,8 @@
 
 - [ ] allow for writing answers
 - [ ] display answers
+  - [ ] option to mark as duplicate
+    - [ ] vote by participants of game (votes by authors should be weighted higher)
 - [ ] vote on answer
 - [ ] offer two options when submitting answer or vote
   - [ ] finish round early (as soon as every participant in a game submitted, go to next stage)
@@ -31,3 +33,6 @@
   - [ ] directly via SQL
   - [ ] add user `admin` with id=0, use as author of bulk upload if no explicit user is mentioned
 - [ ] proper logic for picking next question (making use of tracking views)
+- [ ] comment on questions/answers / chat per game
+  - [ ] certain things should only be visible after the round
+  - [ ] comment could be public or just visible to the recipient
