@@ -58,3 +58,7 @@ Wichtig: Wer ausnahmsweise die richtige Antwort kennt, schreibt natürlich trotz
 
 Diese App orientiert sich am Spiel von Ravensburger und dem Autoren Bertram Kaes - allerdings nur am Regelwerk / Spielprinzip.
 Fragen und Antworten sowie Bilder oder andere urheberrechtlich geschützte Werke aus dem Originalspiel sind nicht enthalten.
+
+Das Spiel wird zwar online gehostet, aber nur einem geschlossenen Personenkreis zugänglich gemacht (nur per Einladung).
+
+Sollte ich dennoch irgendwelchen Rechte verletzen, setzen sie sich bitte mit mir in Verbindung, bevor Sie rechtliche Schritte einleiten. Wir können den Sachverhalt bestimmt gütlich regeln.
