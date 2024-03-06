@@ -11,6 +11,7 @@ export interface Answer {
 	lang: string;
 }
 
-export interface Answers {
+export interface QnA {
+	question: Question;
 	answers: Answer[];
 }
