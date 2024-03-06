@@ -1,12 +1,15 @@
 <script lang="ts">
-    import type { Question } from '$lib/types';
-	export let data: Question
+	import type { Question } from '$lib/types';
+	export let data: Question;
 </script>
 
 <div class="card p-4 max-w-sm">
-    <h3 class="h3">
-        <span class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone">Question</span>
-        <span class="text-xs font-thin">(id: {data.id}, lang: {data.lang})</span>
-    </h3>
-    <p class="text-center pt-3">{data.question}</p>
+	<h3 class="h3">
+		<span
+			class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone"
+			>Question</span
+		>
+		<span class="text-xs font-thin">(id: {data.id}, lang: {data.lang})</span>
+	</h3>
+	<p class="text-center pt-3">{data.question}</p>
 </div>

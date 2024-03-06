@@ -5,7 +5,7 @@
 ### tech stack
 
 - **SvelteKit**
-  + **Skeleton UI**, making use of **TailwindCSS**
+  - **Skeleton UI**, making use of **TailwindCSS**
 - **Typescript**
 - **SQLite**
 - **pnpm**
@@ -52,7 +52,7 @@ You can preview the production build with `pnpm preview`.
 > als ob sie aus einem Lexikon oder Wörterbuch stammen würde. Je überzeugender eure Antwort
 > ausfällt, umso mehr Mitspieler werden darauf hereinfallen.
 
-> Wichtig: Wer ausnahmsweise die richtige Antwort kennt, schreibt natürlich trotzdem ein Lügenmärchen auf – und hofft, damit die Mitspieler aufs Glatteis zu führen. 
+> Wichtig: Wer ausnahmsweise die richtige Antwort kennt, schreibt natürlich trotzdem ein Lügenmärchen auf – und hofft, damit die Mitspieler aufs Glatteis zu führen.
 
 ### Disclaimer
 
