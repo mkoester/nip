@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Question } from '$lib/types';
-	import QuestionCard from '$lib/QuestionCard.svelte';
+	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 
 	export let data: Question;
 </script>
