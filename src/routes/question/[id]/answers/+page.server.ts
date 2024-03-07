@@ -1,59 +1,54 @@
 import type { Question, QnA, Answer } from '$lib/types';
+import { error } from '@sveltejs/kit';
 
-export async function load({ parent }): Promise<QnA> {
-	const answers: Answer[] = [
-		{
-			id: 0,
-			answer: "Nothing. Foxes can't speak English.",
-			lang: 'en'
-		},
-		{
-			id: 1,
-			answer: 'You already know the Answer.',
-			lang: 'en'
-		},
-		{
-			id: 2,
-			answer: 'Eat less, move more.',
-			lang: 'en'
-		},
-		{
-			id: 3,
-			answer: 'Use your lucky color.',
-			lang: 'en'
-		},
-		{
-			id: 4,
-			answer: 'Climb a hill and look around the world.',
-			lang: 'en'
-		},
-		{
-			id: 5,
-			answer: 'Sorry, but this is a really stupid question.',
-			lang: 'en'
-		},
-		{
-			id: 6,
-			answer: 'You are the master of your life.',
-			lang: 'en'
-		},
-		{
-			id: 7,
-			answer: 'If you are asking this, you already know the answer.',
-			lang: 'en'
-		},
-		{
-			id: 8,
-			answer: '42',
-			lang: 'en'
-		}
-	];
+const preparedAnswers = new Map<number, string[]>([
+	[
+		0,
+		[
+			"Nothing. Foxes can't speak English.",
+			'You already know the Answer.',
+			'Eat less, move more.',
+			'Use your lucky color.',
+			'Climb a hill and look around the world.',
+			'Sorry, but this is a really stupid question.',
+			'You are the master of your life.',
+			'If you are asking this, you already know the answer.',
+			'42'
+		]
+	],
+	[1, ['Everyone on board is married']],
+	[
+		2,
+		[
+			'one person just pretended to eat.',
+			"The group consisted of a grandmother, her daughter and her daughter's daughter.",
+			'some other reason.',
+			'how would I know?'
+		]
+	]
+]);
 
-	const question: Promise<Question> = parent();
-	const res: Promise<QnA> = question.then((question: Question) => ({
-		question,
-		answers
-	}));
+export async function load({ parent, params }): Promise<QnA> {
+	const id = Number(params.id);
+	const answerArray = preparedAnswers.get(id);
 
-	return res;
+	if (answerArray == undefined) {
+		error(404, `Question with id '${params.id}' not found`);
+	} else {
+		const answers: Answer[] = answerArray.map(function (val, index) {
+			return {
+				id: index, // fake IDs
+				answer: val,
+				lang: 'en'
+			};
+		});
+
+		const question: Promise<Question> = parent();
+		const res: Promise<QnA> = question.then((question: Question) => ({
+			question,
+			answers
+		}));
+
+		return res;
+	}
 }
