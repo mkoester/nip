@@ -7,6 +7,7 @@
 	export let data: QnA;
 
 	let choice: number;
+	$: chosenAnswer = data.answers.find((answer) => answer.id == choice);
 </script>
 
 <h2>make a choice</h2>
@@ -29,12 +30,11 @@
 	</RadioGroup>
 </div>
 
-{#if choice >= 0}
+{#if chosenAnswer}
 	<h3>your choice</h3>
 
 	<div class="grid place-content-center">
-		<AnswerCard data={data.answers.find((answer) => answer.id == choice)} />
-		<!-- TODO: how to deal with (a just theoretically possible) undefined? -->
+		<AnswerCard data={chosenAnswer} />
 		<button>commit choice (TODO)</button>
 	</div>
 {/if}
