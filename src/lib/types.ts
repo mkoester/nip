@@ -8,7 +8,6 @@ export interface Answer {
 	id: number;
 	user?: number;
 	answer: string;
-	lang: string;
 }
 
 export interface QnA {
