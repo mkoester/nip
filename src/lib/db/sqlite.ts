@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
-import type { Answer, Question } from '$lib/types';
+import type { Answer, Question, User } from '$lib/types';
 
 // you would have to import / invoke this in another file
 async function openDb(): Promise<Database> {
@@ -25,5 +25,11 @@ export async function get_answers(game: number, question_id: number): Promise<An
 			'SELECT id, answer FROM answers WHERE question_id = ? ORDER BY id',
 			question_id
 		)
+	);
+}
+
+export async function get_users(): Promise<User[]> {
+	return openDb().then((db) =>
+		db.all<User[]>('SELECT id, username FROM users WHERE id > 0 ORDER BY id')
 	);
 }

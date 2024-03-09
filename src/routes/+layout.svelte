@@ -2,12 +2,14 @@
 	import {
 		AppShell,
 		AppBar,
+		Avatar,
 		initializeStores,
 		Drawer,
 		getDrawerStore
 	} from '@skeletonlabs/skeleton';
 	import Navigation from '$lib/Navigation.svelte';
 	import '../app.postcss';
+	import type { PageData } from './$types';
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
@@ -15,6 +17,8 @@
 	function drawerOpen(): void {
 		drawerStore.open({});
 	}
+
+	export let data: PageData;
 </script>
 
 <Drawer>
@@ -38,6 +42,13 @@
 					</button>
 					<strong class="text-xl">I don't know a single person who is perfect</strong>
 				</div>
+			</svelte:fragment>
+			<svelte:fragment slot="trail">
+				{#if data?.user}
+					<Avatar initials={data?.user.user_name} background="bg-primary-500" />
+				{:else}
+					<span class="badge variant-filled"><a href="/login">Log in</a></span>
+				{/if}
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

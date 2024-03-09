@@ -12,6 +12,7 @@
 	<ul>
 		<li><a on:click={drawerClose} href="/">Home</a></li>
 		<li><a on:click={drawerClose} href="/about" class="line-through">About</a></li>
+		<li><a on:click={drawerClose} href="/login">Login</a></li>
 		<li><a on:click={drawerClose} href="/question/1">Q1</a></li>
 		<li><a on:click={drawerClose} href="/question/1/answers">Q1 + answers</a></li>
 		<li><a on:click={drawerClose} href="/question/2/answers">Q2 + answers</a></li>

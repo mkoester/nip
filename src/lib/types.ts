@@ -14,3 +14,8 @@ export interface QnA {
 	question: Question;
 	answers: Answer[];
 }
+
+export interface User {
+	id: number;
+	username: string;
+}
