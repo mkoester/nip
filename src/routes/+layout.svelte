@@ -51,7 +51,7 @@
 						>
 					</form>
 				{:else}
-					<span class="badge variant-filled"><a href="/login">Log in</a></span>
+					<span class="badge variant-filled"><a href="/user/login">Log in</a></span>
 				{/if}
 			</svelte:fragment>
 		</AppBar>

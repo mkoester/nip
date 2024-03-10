@@ -20,7 +20,7 @@
 
 {#if chosenUser}
 	<h3>Log in</h3>
-	<form method="POST">
+	<form method="POST" action="/user?/login">
 		<label class="label">
 			username
 			<input readonly class="input" name="username" type="text" value={chosenUser.username} />
