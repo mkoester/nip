@@ -1,13 +1,10 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
 	import { ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
-	import type { ActionData } from './$types';
 
 	export let data: { users: User[] };
 	let selectedUserId: number;
 	$: chosenUser = data.users.find((user) => user.id == selectedUserId);
-
-	export let form: ActionData;
 </script>
 
 <ListBox>
@@ -31,10 +28,4 @@
 		</label>
 		<button class="btn">login</button>
 	</form>
-{/if}
-
-{#if form?.logged_in}
-	<p class="input-success">
-		successfully logged in user '{form.user_name}' with id '{form.user_id}'
-	</p>
 {/if}

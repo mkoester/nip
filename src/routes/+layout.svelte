@@ -45,7 +45,7 @@
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				{#if data?.user}
-					<form method="POST" action="/user?/logout">
+					<form method="POST">
 						<button formaction="/user?/logout"
 							><Avatar initials={data?.user.user_name} background="bg-primary-500" /></button
 						>
