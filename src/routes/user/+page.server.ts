@@ -1,3 +1,4 @@
+import type { User } from '$lib/types';
 import type { Actions, RequestEvent } from './$types';
 import { fail } from '@sveltejs/kit';
 
@@ -12,13 +13,14 @@ export const actions = {
 			if (!id) {
 				return fail(400, { id: true, missing: true });
 			}
-			event.cookies.set('user_name', username?.toString(), { path: '/' });
-			event.cookies.set('user_id', id?.toString(), { path: '/' });
-			return { logged_in: true, user_name: username?.toString(), user_id: id?.toString() };
+			const user: User = {
+				username: username?.toString(),
+				id: Number(id?.toString())
+			};
+			event.cookies.set('user', JSON.stringify(user), { path: '/' });
 		});
 	},
 	logout: async (event: RequestEvent) => {
-		event.cookies.delete('user_name', { path: '/' });
-		event.cookies.delete('user_id', { path: '/' });
+		event.cookies.delete('user', { path: '/' });
 	}
 } satisfies Actions;

@@ -1,14 +1,14 @@
-import type { UserInformation } from '$lib/types';
+import type { User, UserInformation } from '$lib/types';
 
 export async function load({ cookies }): Promise<UserInformation> {
-	const username = cookies.get('user_name');
-	const user_id = cookies.get('user_id');
+	const userString = cookies.get('user');
 
-	if (username && user_id) {
+	if (userString) {
+		const user: User = JSON.parse(userString);
 		return {
 			user: {
-				username,
-				id: Number(user_id)
+				username: user.username,
+				id: Number(user.id)
 			}
 		} satisfies UserInformation;
 	} else {
