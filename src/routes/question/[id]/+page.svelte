@@ -3,7 +3,6 @@
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 
 	export let data: QnA & UserInformation;
-	console.log(data);
 </script>
 
 <h2>something</h2>
