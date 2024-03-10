@@ -1,18 +1,17 @@
-import type { LayoutServerLoad } from './$types';
+import type { UserInformation } from '$lib/types';
 
-export const load = (async ({ cookies }) => {
-	const user_name = cookies.get('user_name');
+export async function load({ cookies }): Promise<UserInformation> {
+	const username = cookies.get('user_name');
 	const user_id = cookies.get('user_id');
 
-	if (user_name && user_id) {
-		// TODO type properly
+	if (username && user_id) {
 		return {
 			user: {
-				user_name,
-				user_id
+				username,
+				id: Number(user_id)
 			}
-		};
+		} satisfies UserInformation;
 	} else {
-		return { user: undefined };
+		return { user: undefined } satisfies UserInformation;
 	}
-}) satisfies LayoutServerLoad;
+}

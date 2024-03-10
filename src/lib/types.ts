@@ -19,3 +19,7 @@ export interface User {
 	id: number;
 	username: string;
 }
+
+export interface UserInformation {
+	user: User | undefined;
+}

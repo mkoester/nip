@@ -9,7 +9,7 @@
 	} from '@skeletonlabs/skeleton';
 	import Navigation from '$lib/Navigation.svelte';
 	import '../app.postcss';
-	import type { PageData } from './$types';
+	import type { UserInformation } from '$lib/types';
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
@@ -18,7 +18,7 @@
 		drawerStore.open({});
 	}
 
-	export let data: PageData;
+	export let data: UserInformation;
 </script>
 
 <Drawer>
@@ -47,7 +47,7 @@
 				{#if data?.user}
 					<form method="POST">
 						<button formaction="/user?/logout"
-							><Avatar initials={data?.user.user_name} background="bg-primary-500" /></button
+							><Avatar initials={data?.user.username} background="bg-primary-500" /></button
 						>
 					</form>
 				{:else}
