@@ -3,11 +3,12 @@
 	export let data: Answer;
 </script>
 
-<div class="card p-4 min-w-56 max-w-96">
+<div class="card p-4 min-w-56 max-w-96 {data.my_answer ? 'border-2' : ''}">
 	<h3 class="h3">
 		<span
 			class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone"
-			>Answer</span
+			>{#if data.my_answer}My
+			{/if}Answer</span
 		>
 		<span class="text-xs font-thin">(id: {data.id})</span>
 	</h3>

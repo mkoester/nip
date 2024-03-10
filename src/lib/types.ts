@@ -8,6 +8,7 @@ export interface Answer {
 	id: number;
 	user?: number;
 	answer: string;
+	my_answer: boolean;
 }
 
 export interface Answers {

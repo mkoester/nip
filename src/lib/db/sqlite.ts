@@ -19,10 +19,15 @@ export async function get_question(
 	);
 }
 
-export async function get_answers(game: number, question_id: number): Promise<Answer[]> {
+export async function get_answers(
+	game: number,
+	question_id: number,
+	current_user: number
+): Promise<Answer[]> {
 	return openDb().then((db) =>
 		db.all<Answer[]>(
-			'SELECT id, answer FROM answers WHERE question_id = ? ORDER BY id',
+			'SELECT id, answer, user_id == ? AS my_answer FROM answers WHERE question_id = ? ORDER BY id',
+			current_user,
 			question_id
 		)
 	);
