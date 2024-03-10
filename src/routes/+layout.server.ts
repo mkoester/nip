@@ -13,6 +13,6 @@ export const load = (async ({ cookies }) => {
 			}
 		};
 	} else {
-		return {};
+		return { user: undefined };
 	}
 }) satisfies LayoutServerLoad;
