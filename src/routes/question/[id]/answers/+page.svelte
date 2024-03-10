@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { QnA } from '$lib/types';
+	import type { QnA, UserInformation } from '$lib/types';
 	import AnswerCard from '$lib/ui/AnswerCard.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
-	export let data: QnA;
+	export let data: QnA & UserInformation;
 
 	let choice: number;
 	$: chosenAnswer = data.answers.find((answer) => answer.id == choice);

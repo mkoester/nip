@@ -10,6 +10,10 @@ export interface Answer {
 	answer: string;
 }
 
+export interface Answers {
+	answers: Answer[];
+}
+
 export interface QnA {
 	question: Question;
 	answers: Answer[];
