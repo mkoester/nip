@@ -13,12 +13,21 @@
 		<li><a on:click={drawerClose} href="/">Home</a></li>
 		<li><a on:click={drawerClose} href="/about" class="line-through">About</a></li>
 		<li><a on:click={drawerClose} href="/user/login">Login</a></li>
-		<li><a on:click={drawerClose} href="/question/1">Q1</a></li>
-		<li><a on:click={drawerClose} href="/question/1/answers">Q1 + answers</a></li>
-		<li><a on:click={drawerClose} href="/question/2/answers">Q2 + answers</a></li>
-		<li><a on:click={drawerClose} href="/question/3/answers">Q3 + answers</a></li>
+		<li><a on:click={drawerClose} href="/game/1">G1</a></li>
+		<li><a on:click={drawerClose} href="/game/5" class="line-through">G5</a></li>
+		<li><a on:click={drawerClose} href="/game/1/question/1">G1, Q1</a></li>
+		<li><a on:click={drawerClose} href="/game/1/question/1/answers">G1, Q1 + answers</a></li>
+		<li><a on:click={drawerClose} href="/game/2/question/2/answers">G2, Q2 + answers</a></li>
+		<li><a on:click={drawerClose} href="/game/3/question/3/answers">G3, Q3 + answers</a></li>
 		<li>
-			<a on:click={drawerClose} href="/question/4/answers" class="line-through">Q4 + answers</a>
+			<a on:click={drawerClose} href="/game/4/question/4/answers" class="line-through"
+				>G4, Q4 + answers</a
+			>
+		</li>
+		<li>
+			<a on:click={drawerClose} href="/game/5/question/4/answers" class="line-through"
+				>G5, Q4 + answers</a
+			>
 		</li>
 	</ul>
 </nav>

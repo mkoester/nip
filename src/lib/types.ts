@@ -1,3 +1,19 @@
+export interface User {
+	id: number;
+	username: string;
+}
+
+export interface UserInformation {
+	user: User | undefined;
+}
+
+export interface Game {
+	id: number;
+	lang: string;
+	created_at: string;
+	participants: User[];
+}
+
 export interface Question {
 	id: number;
 	question: string;
@@ -18,13 +34,4 @@ export interface Answers {
 export interface QnA {
 	question: Question;
 	answers: Answer[];
-}
-
-export interface User {
-	id: number;
-	username: string;
-}
-
-export interface UserInformation {
-	user: User | undefined;
 }

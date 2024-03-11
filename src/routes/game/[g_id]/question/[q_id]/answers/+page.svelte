@@ -1,16 +1,21 @@
 <script lang="ts">
-	import type { QnA, UserInformation } from '$lib/types';
+	import type { Game, QnA, UserInformation } from '$lib/types';
 	import AnswerCard from '$lib/ui/AnswerCard.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
-	export let data: QnA & UserInformation;
+	export let data: QnA & { game: Game } & UserInformation;
 
 	let choice: number;
 	$: chosenAnswer = data.answers.find((answer) => answer.id == choice);
 </script>
 
 <h2>make a choice</h2>
+
+<div class="grid place-content-center">
+	<!-- TODO proper output -->
+	{JSON.stringify(data)}
+</div>
 
 <div class="grid place-content-center">
 	<QuestionCard data={data.question} />
