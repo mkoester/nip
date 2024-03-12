@@ -36,6 +36,12 @@ INSERT INTO questions (id, lang, question, answer) VALUES
  (2, 'en', 'You spot a boat full of people but there isn''t a single person on board. How is that possible?', 'Everyone on board is married.'),
  (3, 'en', 'Two mothers and two daughters went out to eat, everyone ate one slice of pizza, yet only three slices were eaten. How''s that possible?', 'The group consisted of a grandmother, her daughter and her daughter''s daughter.');
 
+INSERT INTO game_questions(game_id, question_id ) VALUES
+(1, 1),
+(1, 2),
+(2, 2),
+(3, 3);
+
 INSERT INTO answers (game_id, user_id, question_id, id, answer) VALUES
  (1,  1, 1, random(), 'You already know the Answer.'),
  (1,  2, 1, random(), 'Eat less, move more.'),
