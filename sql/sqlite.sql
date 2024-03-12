@@ -40,6 +40,11 @@ CREATE TABLE game_questions (
     FOREIGN KEY(question_id) REFERENCES questions(id)
 );
 
+/* TODO: how to do something like this?
+   CONSTRAINT lang_match CHECK ((SELECT 1 FROM games g JOIN questions q ON g.lang = q.lang WHERE g.id = game_id AND q.id = question_id) NOT NULL) ON CONFLICT ROLLBACK
+   making sure that only questions with matching language can be added to a game
+ */
+
 CREATE TABLE answers (
     game_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
