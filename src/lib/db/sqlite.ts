@@ -40,7 +40,7 @@ export async function get_users(): Promise<User[]> {
 }
 
 const getGameParticipantsQuery = `
-SELECT gp.user_id, u.username
+SELECT u.id, u.username
 FROM game_participations AS gp
 JOIN users AS u
 ON gp.user_id = u.id
