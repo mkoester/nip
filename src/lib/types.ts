@@ -11,6 +11,7 @@ export interface Game {
 	id: number;
 	lang: string;
 	created_at: string;
+	joined: string | undefined;
 	participants: User[];
 }
 

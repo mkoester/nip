@@ -67,3 +67,16 @@ export async function get_game(id: number): Promise<Game | undefined> {
 		}
 	});
 }
+
+const getUserParticipationsQuery = `
+SELECT g.id, g.lang, g.created_at, gp.created_at AS joined
+FROM games AS g
+JOIN game_participations AS gp
+ON g.id = gp.game_id
+WHERE gp.user_id = ?
+ORDER BY gp.created_at DESC
+`;
+
+export async function get_games(user_id: number): Promise<Game[]> {
+	return openDb().then((db) => db.all<Game[]>(getUserParticipationsQuery, user_id));
+}

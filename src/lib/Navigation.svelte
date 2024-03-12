@@ -11,6 +11,7 @@
 <nav class="list-nav p-4">
 	<ul>
 		<li><a on:click={drawerClose} href="/">Home</a></li>
+		<li><a on:click={drawerClose} href="/user/games">My games</a></li>
 		<li><a on:click={drawerClose} href="/about" class="line-through">About</a></li>
 		<li><a on:click={drawerClose} href="/user/login">Login</a></li>
 		<li><a on:click={drawerClose} href="/game/1">G1</a></li>
