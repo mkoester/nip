@@ -80,3 +80,18 @@ ORDER BY gp.created_at DESC
 export async function get_games(user_id: number): Promise<Game[]> {
 	return openDb().then((db) => db.all<Game[]>(getUserParticipationsQuery, user_id));
 }
+
+const getQuestionsForGameQuery = `
+SELECT q.id, q.question, q.created_at AS added
+FROM game_questions AS gq
+LEFT JOIN questions AS q
+ON gq.question_id = q.id
+WHERE gq.game_id = ?
+ORDER BY added
+`;
+
+export async function get_questions(game_id: number): Promise<({ added: string } & Question)[]> {
+	return openDb().then((db) =>
+		db.all<({ added: string } & Question)[]>(getQuestionsForGameQuery, game_id)
+	);
+}
