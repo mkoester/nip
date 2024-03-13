@@ -1,31 +1,21 @@
 <script lang="ts">
 	import type { Game, Question, UserInformation } from '$lib/types';
+	import ParticipantsTable from '$lib/ui/ParticipantsTable.svelte';
 
 	export let data: { game: Game; questions: ({ added: string } & Question)[] } & UserInformation;
+
+	let debug = false;
 </script>
 
-<h2>Game {data.game.id}</h2>
+{#if debug}
+	<div class="grid place-content-center">
+		{JSON.stringify(data)}
+	</div>
+{/if}
 
-<div class="grid place-content-center">
-	<!-- TODO proper output -->
-	{JSON.stringify(data)}
-</div>
+<h2 class="h2">Game {data.game.id}</h2>
 
-<h3>Participants</h3>
-
-<div class="table-container">
-	<table class="table table-hover">
-		<thead><tr><th>id</th><th>name</th></tr></thead>
-		<tbody>
-			{#each data.game.participants as user}
-				<tr>
-					<td>{user.id}</td>
-					<td>{user.username}</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
-</div>
+<ParticipantsTable data={data.game.participants} />
 
 <h3>Questions</h3>
 

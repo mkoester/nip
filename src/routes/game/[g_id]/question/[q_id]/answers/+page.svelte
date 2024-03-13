@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Game, QnA, UserInformation } from '$lib/types';
 	import AnswerCard from '$lib/ui/AnswerCard.svelte';
+	import ParticipantsTable from '$lib/ui/ParticipantsTable.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
@@ -9,14 +10,19 @@
 	let choice: number;
 	$: chosenAnswer = data.answers.find((answer) => answer.id == choice);
 	export let form: { success: boolean };
+
+	let debug = false;
 </script>
 
-<h2>make a choice</h2>
+{#if debug}
+	<div class="grid place-content-center">
+		{JSON.stringify(data)}
+	</div>
+{/if}
 
-<div class="grid place-content-center">
-	<!-- TODO proper output -->
-	{JSON.stringify(data)}
-</div>
+<ParticipantsTable data={data.game.participants} />
+
+<h2 class="h2">make a choice</h2>
 
 <div class="grid place-content-center">
 	<QuestionCard data={data.question} />
@@ -37,25 +43,25 @@
 </div>
 
 {#if chosenAnswer}
-	<h3>your choice</h3>
+	<h3 class="h3">your choice</h3>
 
 	{#if !chosenAnswer.my_answer}
 		<div class="grid place-content-center">
 			<AnswerCard data={chosenAnswer} />
 			<form method="POST" action="/game/{data.game.id}/question/{data.question.id}/answers">
-				<label class="label">
+				<label hidden class="label">
 					<span>Game</span>
 					<input readonly class="input" type="text" name="game" value={data.game.id} />
 				</label>
-				<label class="label">
+				<label hidden class="label">
 					<span>Question</span>
 					<input readonly class="input" type="text" name="question" value={data.question.id} />
 				</label>
-				<label class="label">
+				<label hidden class="label">
 					<span>Your choice</span>
 					<input readonly class="input" type="text" name="answer" value={chosenAnswer.id} />
 				</label>
-				<label class="label">
+				<label hidden class="label">
 					<span>Your choice</span>
 					<input
 						readonly

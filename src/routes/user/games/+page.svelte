@@ -2,14 +2,17 @@
 	import type { Game, UserInformation } from '$lib/types';
 
 	export let data: { games: Game[] } & UserInformation;
+
+	let debug = false;
 </script>
 
-<h2>User '{data.user?.username}' with id '{data.user?.id}'</h2>
+{#if debug}
+	<div class="grid place-content-center">
+		{JSON.stringify(data)}
+	</div>
+{/if}
 
-<div class="grid place-content-center">
-	<!-- TODO proper output -->
-	{JSON.stringify(data)}
-</div>
+<h2>User '{data.user?.username}' with id '{data.user?.id}'</h2>
 
 <div class="table-container">
 	<table class="table table-hover">
