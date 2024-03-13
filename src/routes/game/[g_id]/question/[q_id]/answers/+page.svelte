@@ -4,6 +4,8 @@
 	import ParticipantsTable from '$lib/ui/ParticipantsTable.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import { page } from '$app/stores';
+	import HomeIcon from '$lib/icons/HomeIcon.svelte';
 
 	export let data: QnA & { game: Game } & UserInformation;
 
@@ -14,11 +16,29 @@
 	let debug = false;
 </script>
 
+<ol class="breadcrumb">
+	<li class="crumb"><a class="anchor" href="/"><HomeIcon /></a></li>
+	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+	<li class="crumb">
+		<a class="anchor" href="/game/{$page.params.g_id}">Game {$page.params.g_id}</a>
+	</li>
+	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+	<li class="crumb">
+		<a class="anchor" href="/game/{$page.params.g_id}/question/{$page.params.q_id}"
+			>Question {$page.params.q_id}</a
+		>
+	</li>
+	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+	<li>Answers</li>
+</ol>
+
 {#if debug}
 	<div class="grid place-content-center">
 		{JSON.stringify(data)}
 	</div>
 {/if}
+
+<h2 class="h2">Game {$page.params.g_id}</h2>
 
 <ParticipantsTable data={data.game.participants} />
 
