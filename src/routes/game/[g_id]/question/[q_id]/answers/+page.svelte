@@ -38,8 +38,10 @@
 {#if chosenAnswer}
 	<h3>your choice</h3>
 
-	<div class="grid place-content-center">
-		<AnswerCard data={chosenAnswer} />
-		<button>commit choice (TODO)</button>
-	</div>
+	{#if !chosenAnswer.my_answer}
+		<div class="grid place-content-center">
+			<AnswerCard data={chosenAnswer} />
+			<button>commit choice (TODO)</button>
+		</div>
+	{/if}
 {/if}
