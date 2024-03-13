@@ -8,6 +8,7 @@
 
 	let choice: number;
 	$: chosenAnswer = data.answers.find((answer) => answer.id == choice);
+	export let form: { success: boolean };
 </script>
 
 <h2>make a choice</h2>
@@ -41,7 +42,42 @@
 	{#if !chosenAnswer.my_answer}
 		<div class="grid place-content-center">
 			<AnswerCard data={chosenAnswer} />
-			<button>commit choice (TODO)</button>
+			<form method="POST" action="/game/{data.game.id}/question/{data.question.id}/answers">
+				<label class="label">
+					<span>Game</span>
+					<input readonly class="input" type="text" name="game" value={data.game.id} />
+				</label>
+				<label class="label">
+					<span>Question</span>
+					<input readonly class="input" type="text" name="question" value={data.question.id} />
+				</label>
+				<label class="label">
+					<span>Your choice</span>
+					<input readonly class="input" type="text" name="answer" value={chosenAnswer.id} />
+				</label>
+				<label class="label">
+					<span>Your choice</span>
+					<input
+						readonly
+						class="input"
+						type="text"
+						name="answer_text"
+						value={chosenAnswer.answer}
+					/>
+				</label>
+				<button class="btn">commit choice</button>
+			</form>
 		</div>
+	{/if}
+{/if}
+
+{#if form}
+	{#if form.success}
+		<p class="input-success">Successfully submitted your answer</p>
+	{:else}
+		<p class="input-error">
+			While submitting your answer, some error occurred (most likely you already submitted a choice
+			before)
+		</p>
 	{/if}
 {/if}
