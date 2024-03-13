@@ -125,3 +125,32 @@ export async function insert_answer(
 			return false;
 		});
 } // TODO: since this query might fail (UNIQUE constraint failed: answers.game_id, answers.user_id, answers.question_id) I need to handle these possible cases properly (also with a proper logging library)
+
+const insertAnswerChoiceQuery = `
+INSERT INTO choices (game_id, user_id, question_id, answer_id) VALUES
+ (?, ?, ?, ?)
+`; //TODO maybe this should be an INSERT OR UPDATE / UPSERT
+
+export async function insert_choice( // TODO a lot of duolicated code (insert_answer, insert_choice)
+	game_id: number,
+	user_id: number,
+	question_id: number,
+	answer_id: number
+): Promise<boolean> {
+	return openDb()
+		.then((db) => db.run(insertAnswerChoiceQuery, game_id, user_id, question_id, answer_id))
+		.then((result) => {
+			if (result.lastID) {
+				return result.lastID > 0;
+			} else {
+				return false;
+			}
+		})
+		.catch((onrejected) => {
+			console.log(
+				`error during sqlite *insert_choice* with user '${user_id}', game '${game_id}', question '${question_id}' and some choice (answer id)\n`,
+				onrejected
+			);
+			return false;
+		});
+}

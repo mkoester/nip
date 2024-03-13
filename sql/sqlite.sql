@@ -58,3 +58,16 @@ CREATE TABLE answers (
     FOREIGN KEY(question_id) REFERENCES game_questions(question_id),
     CONSTRAINT unique_id UNIQUE (game_id, question_id, id) ON CONFLICT ROLLBACK
 );
+
+CREATE TABLE choices (
+    game_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    answer_id INTEGER NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (game_id, user_id, question_id, answer_id),
+    FOREIGN KEY(game_id) REFERENCES game_questions(game_id),
+    FOREIGN KEY(user_id) REFERENCES game_participations(user_id)
+    FOREIGN KEY(question_id) REFERENCES game_questions(question_id),
+    FOREIGN KEY(answer_id) REFERENCES answers(id)
+);

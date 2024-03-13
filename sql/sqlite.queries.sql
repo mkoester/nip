@@ -4,6 +4,7 @@ SELECT * FROM game_participations;
 SELECT * FROM questions;
 SELECT * FROM game_questions;
 SELECT * FROM answers;
+SELECT * FROM choices;
 
 SELECT g.id AS game_id, lang, username 
 FROM games AS g
@@ -26,3 +27,10 @@ INSERT INTO answers (game_id, user_id, question_id, id, answer)
 SELECT game_id, user_id, question_id, id, 'should not work' FROM answers WHERE game_id = 1 AND user_id = 2 AND question_id = 1;
 
 SELECT * FROM answers WHERE user_id = 2;
+
+SELECT q.id, q.question, q.created_at AS added
+FROM game_questions AS gq
+LEFT JOIN questions AS q
+ON gq.question_id = q.id
+WHERE gq.game_id = 1
+ORDER BY added;
