@@ -60,6 +60,8 @@ INSERT INTO answers (game_id, user_id, question_id, id, answer) VALUES
 INSERT INTO answers (game_id, user_id, question_id, id, answer)
 SELECT 1, 0, id, random(), answer FROM questions WHERE id = 1
 UNION
+SELECT 1, 0, id, random(), answer FROM questions WHERE id = 2
+UNION
 SELECT 2, 0, id, random(), answer FROM questions WHERE id = 2
 UNION
 SELECT 3, 0, id, random(), answer FROM questions WHERE id = 3;

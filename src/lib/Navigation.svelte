@@ -18,6 +18,8 @@
 		<li><a on:click={drawerClose} href="/game/5" class="line-through">G5</a></li>
 		<li><a on:click={drawerClose} href="/game/1/question/1">G1, Q1</a></li>
 		<li><a on:click={drawerClose} href="/game/1/question/1/answers">G1, Q1 + answers</a></li>
+		<li><a on:click={drawerClose} href="/game/1/question/2">G1, Q2</a></li>
+		<li><a on:click={drawerClose} href="/game/1/question/2/answers">G1, Q2 + answers</a></li>
 		<li><a on:click={drawerClose} href="/game/2/question/2/answers">G2, Q2 + answers</a></li>
 		<li><a on:click={drawerClose} href="/game/3/question/3/answers">G3, Q3 + answers</a></li>
 		<li>
