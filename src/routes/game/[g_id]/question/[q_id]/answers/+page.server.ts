@@ -1,15 +1,27 @@
-import { get_answers, insert_choice } from '$lib/db/sqlite.js';
+import { get_answers, insert_choice, get_choice } from '$lib/db/sqlite.js';
 import type { Answer, Answers, User } from '$lib/types';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
-export async function load({ locals, params }): Promise<Answers> {
+export async function load({
+	locals,
+	params
+}): Promise<Answers & { my_choice: Answer | undefined }> {
 	const user: User | undefined = locals.user;
 	const g_id = Number(params.g_id);
 	const q_id = Number(params.q_id);
+	let myChoice: Promise<Answer | undefined>;
+	if (user) {
+		myChoice = get_choice(g_id, user.id, q_id);
+	} else {
+		myChoice = Promise.resolve(undefined);
+	}
+
 	const userID: number = user?.id || -1;
 	return get_answers(g_id, q_id, userID).then((a: Answer[]) => {
-		return { answers: a } satisfies Answers;
+		return myChoice.then((c: Answer | undefined) => {
+			return { answers: a, my_choice: c } satisfies Answers & { my_choice: Answer | undefined };
+		});
 	});
 }
 

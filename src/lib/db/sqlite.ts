@@ -154,3 +154,34 @@ export async function insert_choice( // TODO a lot of duplicated code (insert_an
 			return false;
 		});
 }
+
+export async function get_answer(
+	game_id: number,
+	user_id: number,
+	question_id: number
+): Promise<Answer | undefined> {
+	return openDb().then((db) =>
+		db.get<Answer>(
+			'SELECT id, user_id, answer, true AS my_answer FROM answers WHERE game_id = ? AND user_id = ? AND question_id = ?',
+			game_id,
+			user_id,
+			question_id
+		)
+	);
+}
+
+const getAnswerChoiceQuery = `
+SELECT a.id, answer, false AS my_answer
+FROM choices AS c
+JOIN answers AS a
+ON c.answer_id = a.id AND c.game_id = a.game_id AND c.question_id = a.question_id
+WHERE c.game_id = ? AND c.user_id = ? AND c.question_id = ?
+`;
+
+export async function get_choice(
+	game_id: number,
+	user_id: number,
+	question_id: number
+): Promise<Answer | undefined> {
+	return openDb().then((db) => db.get<Answer>(getAnswerChoiceQuery, game_id, user_id, question_id));
+}
