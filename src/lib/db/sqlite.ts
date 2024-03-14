@@ -99,7 +99,7 @@ export async function get_questions(game_id: number): Promise<({ added: string }
 
 const insertAnswerQuery = `
 INSERT INTO answers (game_id, user_id, question_id, id, answer) VALUES
- (?, ?, ?, random(), ?)
+ (?, ?, ?, random() / 10000, ?)
 `; //TODO maybe this should be an INSERT OR UPDATE / UPSERT
 
 export async function insert_answer(

@@ -43,25 +43,25 @@ INSERT INTO game_questions(game_id, question_id ) VALUES
 (3, 3);
 
 INSERT INTO answers (game_id, user_id, question_id, id, answer) VALUES
- (1,  1, 1, random(), 'You already know the Answer.'),
- (1,  2, 1, random(), 'Eat less, move more.'),
- (1,  3, 1, random(), 'Use your lucky color.'),
- (1,  4, 1, random(), 'Climb a hill and look around the world.'),
- (1,  5, 1, random(), 'Sorry, but this is a really stupid question.'),
- (1,  6, 1, random(), 'You are the master of your life.'),
- (1,  7, 1, random(), 'If you are asking this, you already know the answer.'),
- (1,  8, 1, random(), '42'),
- (2,  9, 2, random(), 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'),
- (2, 10, 2, random(), 'Months on ye at by esteem desire warmth former. Sure that that way gave any fond now. His boy middleton sir nor engrossed affection excellent.'),
- (3,  8, 3, random(), 'One person just pretended to eat.'),
- (3,  9, 3, random(), 'Some other reason.'),
- (3, 10, 3, random(), 'How would I know?');
+ (1,  1, 1, random() / 10000, 'You already know the Answer.'),
+ (1,  2, 1, random() / 10000, 'Eat less, move more.'),
+ (1,  3, 1, random() / 10000, 'Use your lucky color.'),
+ (1,  4, 1, random() / 10000, 'Climb a hill and look around the world.'),
+ (1,  5, 1, random() / 10000, 'Sorry, but this is a really stupid question.'),
+ (1,  6, 1, random() / 10000, 'You are the master of your life.'),
+ (1,  7, 1, random() / 10000, 'If you are asking this, you already know the answer.'),
+ (1,  8, 1, random() / 10000, '42'),
+ (2,  9, 2, random() / 10000, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'),
+ (2, 10, 2, random() / 10000, 'Months on ye at by esteem desire warmth former. Sure that that way gave any fond now. His boy middleton sir nor engrossed affection excellent.'),
+ (3,  8, 3, random() / 10000, 'One person just pretended to eat.'),
+ (3,  9, 3, random() / 10000, 'Some other reason.'),
+ (3, 10, 3, random() / 10000, 'How would I know?');
 
 INSERT INTO answers (game_id, user_id, question_id, id, answer)
-SELECT 1, 0, id, random(), answer FROM questions WHERE id = 1
+SELECT 1, 0, id, random() / 10000, answer FROM questions WHERE id = 1
 UNION
-SELECT 1, 0, id, random(), answer FROM questions WHERE id = 2
+SELECT 1, 0, id, random() / 10000, answer FROM questions WHERE id = 2
 UNION
-SELECT 2, 0, id, random(), answer FROM questions WHERE id = 2
+SELECT 2, 0, id, random() / 10000, answer FROM questions WHERE id = 2
 UNION
-SELECT 3, 0, id, random(), answer FROM questions WHERE id = 3;
+SELECT 3, 0, id, random() / 10000, answer FROM questions WHERE id = 3;
