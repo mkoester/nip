@@ -1,10 +1,10 @@
 import type { User } from '$lib/types';
-import type { Actions, RequestEvent } from './$types';
-import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
-	login: async (event: RequestEvent) => {
-		return event.request.formData().then((formData) => {
+	login: async ({ request, cookies }) => {
+		return request.formData().then((formData) => {
 			const username: FormDataEntryValue | null = formData.get('username');
 			const id: FormDataEntryValue | null = formData.get('id');
 			if (!username) {
@@ -17,10 +17,12 @@ export const actions = {
 				username: username?.toString(),
 				id: Number(id?.toString())
 			};
-			event.cookies.set('user', JSON.stringify(user), { path: '/' });
+			cookies.set('user', JSON.stringify(user), { path: '/', maxAge: 60 * 60 * 24 * 30 });
+			throw redirect(302, '/user/games');
 		});
 	},
-	logout: async (event: RequestEvent) => {
-		event.cookies.delete('user', { path: '/' });
+	logout: async ({ cookies }) => {
+		cookies.delete('user', { path: '/' });
+		throw redirect(302, '/');
 	}
 } satisfies Actions;
