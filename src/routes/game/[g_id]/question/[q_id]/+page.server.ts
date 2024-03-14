@@ -29,7 +29,7 @@ export const actions = {
 				// TODO check values and permissions
 				return insert_answer(game_id, user_id, question_id, answer_text).then((success) => {
 					console.log(
-						`DEBUG: insert_answer for user '${user_id}', game '${game_id}', question '${question_id}: ${success}'`
+						`DEBUG: insert_answer for user '${user_id}', game '${game_id}', question '${question_id}: success? ${success}'`
 					);
 					return { success };
 				});

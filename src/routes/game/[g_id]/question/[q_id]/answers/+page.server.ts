@@ -40,7 +40,7 @@ export const actions = {
 				// TODO check values and permissions
 				return insert_choice(game_id, user_id, question_id, answer_id).then((success) => {
 					console.log(
-						`DEBUG: insert_choice for user '${user_id}', game '${game_id}', question '${question_id}: ${success}'`
+						`DEBUG: insert_choice for user '${user_id}', game '${game_id}', question '${question_id}: success? ${success}'`
 					);
 					return { success };
 				});

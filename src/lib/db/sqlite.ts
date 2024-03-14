@@ -131,7 +131,7 @@ INSERT INTO choices (game_id, user_id, question_id, answer_id) VALUES
  (?, ?, ?, ?)
 `; //TODO maybe this should be an INSERT OR UPDATE / UPSERT
 
-export async function insert_choice( // TODO a lot of duolicated code (insert_answer, insert_choice)
+export async function insert_choice( // TODO a lot of duplicated code (insert_answer, insert_choice)
 	game_id: number,
 	user_id: number,
 	question_id: number,
