@@ -1,17 +1,15 @@
 import { get_games } from '$lib/db/sqlite';
-import type { Game, UserInformation } from '$lib/types';
+import type { Game, User } from '$lib/types';
 import { error } from '@sveltejs/kit';
 
-export async function load({ parent }): Promise<{ games: Game[] }> {
-	const userInformation: Promise<UserInformation> = parent();
+export async function load({ locals }): Promise<{ games: Game[] }> {
+	const user: User | undefined = locals.user;
 
-	return userInformation.then((u) => {
-		if (!u?.user) {
-			error(403, `You have to be logged in`);
-		} else {
-			return get_games(u.user.id).then((g) => {
-				return { games: g };
-			});
-		}
-	});
+	if (!user) {
+		error(403, `You have to be logged in`);
+	} else {
+		return get_games(user.id).then((g) => {
+			return { games: g };
+		});
+	}
 }

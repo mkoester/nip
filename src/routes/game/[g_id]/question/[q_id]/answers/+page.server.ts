@@ -1,26 +1,24 @@
 import { get_answers, insert_choice } from '$lib/db/sqlite.js';
-import { getUserInformation } from '$lib/helper';
-import type { Answer, Answers, UserInformation } from '$lib/types';
+import type { Answer, Answers, User } from '$lib/types';
 import { fail } from '@sveltejs/kit';
-import type { Actions, RequestEvent } from './$types';
+import type { Actions } from './$types';
 
-export async function load({ parent, params }): Promise<Answers> {
+export async function load({ locals, params }): Promise<Answers> {
+	const user: User | undefined = locals.user;
 	const g_id = Number(params.g_id);
 	const q_id = Number(params.q_id);
-	return parent().then((u: UserInformation) => {
-		const userID: number = u.user?.id || -1;
-		return get_answers(g_id, q_id, userID).then((a: Answer[]) => {
-			return { answers: a } satisfies Answers;
-		});
+	const userID: number = user?.id || -1;
+	return get_answers(g_id, q_id, userID).then((a: Answer[]) => {
+		return { answers: a } satisfies Answers;
 	});
 }
 
 export const actions = {
-	default: async (event: RequestEvent) => {
+	default: async ({ request, locals }) => {
 		// TODO a lot of code duplication with .../[q_id]/+page.server.ts
-		return event.request.formData().then((formData) => {
-			const userInformation: UserInformation = getUserInformation(event.cookies);
-			if (!userInformation.user) {
+		return request.formData().then((formData) => {
+			const user: User | undefined = locals.user;
+			if (!user) {
 				return fail(403, { error: true, message: 'you have to be logged in to submit an answer' });
 			} else {
 				const game: FormDataEntryValue | null = formData.get('game');
@@ -36,7 +34,7 @@ export const actions = {
 					return fail(400, { answer: true, missing: true });
 				}
 				const game_id = Number(game?.toString());
-				const user_id = userInformation.user.id;
+				const user_id = user.id;
 				const question_id = Number(question?.toString());
 				const answer_id = Number(answer?.toString());
 				// TODO check values and permissions

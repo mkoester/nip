@@ -1,14 +1,13 @@
 import { insert_answer } from '$lib/db/sqlite';
-import { getUserInformation } from '$lib/helper';
-import type { UserInformation } from '$lib/types';
+import type { User } from '$lib/types';
 import { fail } from '@sveltejs/kit';
-import type { Actions, RequestEvent } from './$types';
+import type { Actions } from './$types';
 
 export const actions = {
-	default: async (event: RequestEvent) => {
-		return event.request.formData().then((formData) => {
-			const userInformation: UserInformation = getUserInformation(event.cookies);
-			if (!userInformation.user) {
+	default: async ({ request, locals }) => {
+		return request.formData().then((formData) => {
+			const user: User | undefined = locals.user;
+			if (!user) {
 				return fail(403, { error: true, message: 'you have to be logged in to submit an answer' });
 			} else {
 				const game: FormDataEntryValue | null = formData.get('game');
@@ -24,7 +23,7 @@ export const actions = {
 					return fail(400, { answer: true, missing: true });
 				}
 				const game_id = Number(game?.toString());
-				const user_id = userInformation.user.id;
+				const user_id = user.id;
 				const question_id = Number(question?.toString());
 				const answer_text = answer?.toString();
 				// TODO check values and permissions
