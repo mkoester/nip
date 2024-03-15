@@ -36,3 +36,10 @@ export interface QnA {
 	question: Question;
 	answers: Answer[];
 }
+
+export enum JwtVerifyResult {
+	no_cookie = 1,
+	token_expired,
+	unknown_error,
+	unknown_payload
+}
