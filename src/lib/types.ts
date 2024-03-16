@@ -43,3 +43,8 @@ export enum JwtVerifyResult {
 	unknown_error,
 	unknown_payload
 }
+
+export enum JwtType {
+	auth = 1,
+	refresh
+}

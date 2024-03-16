@@ -20,20 +20,37 @@ export function getUserInformation(cookies: Cookies): UserInformation {
 }
 
 const authCookieName = 'authToken';
-const secret = '81a33490ec51c2e2d7a72ff094c4a062fc2a27648032c4658edd0ccb226e0da6'; // TODO get via env variable
+const refreshCookieName = 'refreshToken';
+const secretAuth = '81a33490ec51c2e2d7a72ff094c4a062fc2a27648032c4658edd0ccb226e0da6'; // TODO get via env variable
+const secretRefresh = '37878bcfb282312d4a08d96247f51624732000179342057d36c8547513292410'; // TODO get via env variable
 
-export function setAuthToken(user: User, cookies: Cookies) {
-	const authToken = jwt.sign(user, secret, { expiresIn: '10s' });
-	cookies.set(authCookieName, authToken, {
+function setToken(
+	user: User,
+	cookies: Cookies,
+	secret: string,
+	cookieName: string,
+	duration: string,
+	maxAge: number
+): void {
+	const authToken = jwt.sign(user, secret, { expiresIn: duration });
+	cookies.set(cookieName, authToken, {
 		path: '/',
 		secure: !dev,
 		httpOnly: true,
-		maxAge: 60 * 60 * 24 * 30
+		maxAge: maxAge
 	});
 }
 
-export function verifyAuthToken(cookies: Cookies): User | JwtVerifyResult {
-	const authToken: string | undefined = cookies.get(authCookieName);
+export function setAuthToken(user: User, cookies: Cookies): void {
+	setToken(user, cookies, secretAuth, authCookieName, '10s', 60 * 10);
+}
+
+export function setRefreshToken(user: User, cookies: Cookies): void {
+	setToken(user, cookies, secretRefresh, refreshCookieName, '120d', 60 * 60 * 24 * 120);
+}
+
+function verifyToken(cookies: Cookies, secret: string, cookieName: string): User | JwtVerifyResult {
+	const authToken: string | undefined = cookies.get(cookieName);
 	if (!authToken) return JwtVerifyResult.no_cookie;
 	try {
 		const payload = jwt.verify(authToken, secret);
@@ -58,6 +75,18 @@ export function verifyAuthToken(cookies: Cookies): User | JwtVerifyResult {
 	}
 }
 
+export function verifyAuthToken(cookies: Cookies): User | JwtVerifyResult {
+	return verifyToken(cookies, secretAuth, authCookieName);
+}
+
+export function verifyRefreshToken(cookies: Cookies): User | JwtVerifyResult {
+	return verifyToken(cookies, secretRefresh, refreshCookieName);
+}
+
 export function deleteAuthToken(cookies: Cookies) {
 	cookies.delete(authCookieName, { path: '/' });
+}
+
+export function deleteRefreshToken(cookies: Cookies) {
+	cookies.delete(refreshCookieName, { path: '/' });
 }

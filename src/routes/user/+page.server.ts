@@ -1,7 +1,7 @@
 import type { User } from '$lib/types';
 import type { Actions } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
-import { deleteAuthToken, setAuthToken } from '$lib/helper';
+import { deleteAuthToken, deleteRefreshToken, setAuthToken, setRefreshToken } from '$lib/helper';
 
 export const actions = {
 	login: async ({ request, cookies }) => {
@@ -19,11 +19,13 @@ export const actions = {
 				id: Number(id?.toString())
 			};
 			setAuthToken(user, cookies);
+			setRefreshToken(user, cookies);
 			throw redirect(302, '/user/games');
 		});
 	},
 	logout: async ({ cookies }) => {
 		deleteAuthToken(cookies);
+		deleteRefreshToken(cookies);
 		throw redirect(302, '/');
 	}
 } satisfies Actions;

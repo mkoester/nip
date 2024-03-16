@@ -1,15 +1,43 @@
-import { deleteAuthToken, verifyAuthToken } from '$lib/helper';
-import { JwtVerifyResult, type User } from '$lib/types';
+import {
+	deleteAuthToken,
+	deleteRefreshToken,
+	setAuthToken,
+	verifyAuthToken,
+	verifyRefreshToken
+} from '$lib/helper';
+import { JwtType, JwtVerifyResult, type User } from '$lib/types';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export async function handle({ event, resolve }) {
-	const verified: User | JwtVerifyResult = verifyAuthToken(event.cookies);
+// I followed https://www.youtube.com/watch?v=1mov2Piv97k
+// this feels a bit off (sending both tokens all the time)
+// why not use just one and refresh it with each request? (since I am not doing any I/O etc)
+function handleJwt(
+	jwtType: JwtType,
+	verified: User | JwtVerifyResult,
+	event: RequestEvent<Partial<Record<string, string>>, string | null>
+) {
 	event.locals.user = undefined;
 	switch (verified) {
 		case JwtVerifyResult.no_cookie: {
+			if (jwtType == JwtType.auth) {
+				const verified: User | JwtVerifyResult = verifyRefreshToken(event.cookies);
+				handleJwt(JwtType.refresh, verified, event); // the auth token is not present, but let's try to renew via refresh token
+			}
 			break;
 		}
 		case JwtVerifyResult.token_expired: {
-			deleteAuthToken(event.cookies);
+			switch (jwtType) {
+				case JwtType.auth: {
+					deleteAuthToken(event.cookies);
+					const verified: User | JwtVerifyResult = verifyRefreshToken(event.cookies);
+					handleJwt(JwtType.refresh, verified, event); // the auth token is expired, but let's try to renew via refresh token
+					break;
+				}
+				case JwtType.refresh: {
+					deleteRefreshToken(event.cookies); // the refresh token is expired, too
+					break;
+				}
+			}
 			break;
 		}
 		case JwtVerifyResult.unknown_error: {
@@ -20,14 +48,31 @@ export async function handle({ event, resolve }) {
 		}
 		default: {
 			if (typeof verified === 'object') {
-				event.locals.user = verified;
+				switch (jwtType) {
+					case JwtType.auth: {
+						event.locals.user = verified;
+						break;
+					}
+					case JwtType.refresh: {
+						setAuthToken(verified, event.cookies); // assign a new auth token
+						event.locals.user = verified; // TODO: when to assign a new refresh token?
+						break;
+					}
+				}
 			} else {
-				console.log(`DEBUG unhandled case in handle function\n${JSON.stringify(verified)}`);
+				console.log(
+					`DEBUG unhandled case in handle function for jwtType ${jwtType}\n${JSON.stringify(verified)}`
+				);
 				console.log(typeof verified);
 			}
 			break;
 		}
 	}
+}
+
+export async function handle({ event, resolve }) {
+	const verified: User | JwtVerifyResult = verifyAuthToken(event.cookies);
+	handleJwt(JwtType.auth, verified, event);
 
 	return resolve(event);
 }
