@@ -42,7 +42,7 @@ function setToken(
 }
 
 export function setAuthToken(user: User, cookies: Cookies): void {
-	setToken(user, cookies, secretAuth, authCookieName, '10s', 60 * 10);
+	setToken(user, cookies, secretAuth, authCookieName, '10m', 60 * 10);
 }
 
 export function setRefreshToken(user: User, cookies: Cookies): void {
