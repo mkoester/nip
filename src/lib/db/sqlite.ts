@@ -1,11 +1,15 @@
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
 import type { Answer, Game, Question, User } from '$lib/types';
+import { dev } from '$app/environment';
 
-// you would have to import / invoke this in another file
+let db_path: string;
+if (dev) db_path = './database.dev.sqlite';
+else db_path = '/app/data/database.sqlite'; // TODO /app is specific for the node docker image; rather via ENV variable
+
 async function openDb(): Promise<Database> {
 	return open({
-		filename: './database.dev.sqlite',
+		filename: db_path,
 		driver: sqlite3.cached.Database
 	});
 }
