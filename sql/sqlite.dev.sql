@@ -32,9 +32,23 @@ INSERT INTO game_participations (game_id, user_id) VALUES
  (3, 10);
 
 INSERT INTO questions (id, lang, question, answer) VALUES
- (1, 'en', 'What did the fox say?', 'Nothing. Foxes can''t speak English.'),
- (2, 'en', 'You spot a boat full of people but there isn''t a single person on board. How is that possible?', 'Everyone on board is married.'),
- (3, 'en', 'Two mothers and two daughters went out to eat, everyone ate one slice of pizza, yet only three slices were eaten. How''s that possible?', 'The group consisted of a grandmother, her daughter and her daughter''s daughter.');
+ ( 1, 'en', 'What did the fox say?', 'Nothing. Foxes can''t speak English.'),
+ ( 2, 'en', 'You spot a boat full of people but there isn''t a single person on board. How is that possible?', 'Everyone on board is married.'),
+ ( 3, 'en', 'Two mothers and two daughters went out to eat, everyone ate one slice of pizza, yet only three slices were eaten. How''s that possible?', 'The group consisted of a grandmother, her daughter and her daughter''s daughter.'),
+ ( 4, 'de', 'Was verbirgt sich hinter dem Begriff Orchideenfach?', 'Ein Studienfach, welches nur an wenigen Universitäten angeboten und von wenigen Studenten studiert wird.'),
+ ( 5, 'de', 'Was ist der/die/das Zehnmond?', 'Ein altes Wort für den Dezember.'),
+ ( 6, 'de', 'Was meint man mit Hirnholz?', 'Ein Holz, welches längs geschnitten wurde, sodass die Jahresringe zu erkennen sind.'),
+ ( 7, 'de', 'Na klar, der/die/das Portierzwiebel ist ...', '... ein kleinen Haarknoten von Frauen, früher von Portierfrauen getragen.'),
+ ( 8, 'de', 'Was bezeichnet man als Quetschkommode?', 'Eine Ziehharmonika oder ein Akkordeon.'),
+ ( 9, 'de', 'Sapperlot, was ist ein Vatermörder?', 'Ein gestärkter Hemdkragen, der vor allem im 19. Jahrhundert verbreitet war.'),
+ (10, 'de', 'Was war noch einmal der/die/das godspot?', 'Das freie WLAN der evangelischen Kirche.'),
+ (11, 'de', 'Was ist wohl ein/eine Googol?', 'Eine Zahl mit 100 Nullen.'),
+ (12, 'de', 'Was meint man mit Asphyxie?', 'Der medizinische Begriff für Atemstillstand.'),
+ (13, 'de', 'Was bezeichnet man als aerob?', 'Einen Organismus, der Sauerstoff zur Energiegewinnung nutzt.'),
+ (14, 'de', 'Na klar, der/die/das Gluon ist ...', '... subatomare Elementarteilchen, die indirekt für die Anziehung von Protonen und Neutronen in einem Atomkern verantwortlich sind.'),
+ (15, 'de', 'Was ist der/die/das Kohorte?', 'In der Soziologie bezeichnet man so Altersgruppen.'),
+ (16, 'de', 'Sapperlot, was ist ein/eine Allegorie?', 'Bildhafte Wiedergabe von Begriffen und Idealvorstellungen in menschlicher Gestalt.'),
+ (17, 'de', 'Was war noch einmal der/die/das ?', 'Das Bilden und schlagartige Zusammenfallen von mit Dampf gefüllten Blasen.');
 
 INSERT INTO game_questions(game_id, question_id ) VALUES
 (1, 1),
