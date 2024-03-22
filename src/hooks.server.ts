@@ -6,6 +6,7 @@ import {
 	verifyRefreshToken
 } from '$lib/helper';
 import { JwtType, JwtVerifyResult, type User } from '$lib/types';
+import { config, loadTranslations } from '$lib/translations';
 import type { RequestEvent } from '@sveltejs/kit';
 
 // I followed https://www.youtube.com/watch?v=1mov2Piv97k
@@ -70,9 +71,47 @@ function handleJwt(
 	}
 }
 
+function withTranslations(event: RequestEvent<Partial<Record<string, string>>, string | null>) {
+	const { pathname } = event.url;
+	const langAccept = event.request.headers.get('accept-language');
+
+	let lang: string;
+	if (!langAccept) {
+		console.log('DEBUG falling back to English, no accept-language HEADER');
+		lang = 'en';
+	} else {
+		const languages = langAccept.split(',').map((l) => l.trim().slice(0, 2));
+
+		const acceptedLang: string | undefined = languages.find((l) => {
+			const langId: string = l;
+			return Object.keys(config.translations).indexOf(langId) >= 0;
+		});
+
+		if (!acceptedLang) {
+			console.log(
+				'DEBUG falling back to English, accept-language HEADER is not supported:\n' + languages
+			);
+			lang = 'en';
+		} else {
+			lang = acceptedLang;
+		}
+	}
+
+	const translations = loadTranslations(lang, pathname);
+
+	if (!translations) {
+		console.log('ERROR while loading translations');
+		return Promise.resolve(event);
+	} else {
+		return translations.then(() => {
+			return event;
+		});
+	}
+}
+
 export async function handle({ event, resolve }) {
 	const verified: User | JwtVerifyResult = verifyAuthToken(event.cookies);
 	handleJwt(JwtType.auth, verified, event);
 
-	return resolve(event);
+	return withTranslations(event).then(resolve);
 }
