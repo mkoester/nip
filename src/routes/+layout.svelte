@@ -7,8 +7,9 @@
 		Drawer,
 		getDrawerStore
 	} from '@skeletonlabs/skeleton';
-	import Navigation from '$lib/Navigation.svelte';
 	import '../app.postcss';
+	import Navigation from '$lib/Navigation.svelte';
+	import { t } from '$lib/translations/index';
 	import type { UserInformation } from '$lib/types';
 
 	initializeStores();
@@ -40,7 +41,7 @@
 							</svg>
 						</span>
 					</button>
-					<strong class="text-xl">I don't know a single person who is perfect</strong>
+					<strong class="text-xl">{@html $t('header.title')}</strong>
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
