@@ -72,6 +72,7 @@ function handleJwt(
 }
 
 function withTranslations(event: RequestEvent<Partial<Record<string, string>>, string | null>) {
+	// TODO allow to overide language by user, store in cookie
 	const { pathname } = event.url;
 	const langAccept = event.request.headers.get('accept-language');
 

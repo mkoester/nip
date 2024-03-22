@@ -41,7 +41,7 @@
 							</svg>
 						</span>
 					</button>
-					<strong class="text-xl">{@html $t('header.title')}</strong>
+					<strong class="text-xl">{@html $t('header.title')}</strong><!-- TODO how to avoid @html? -->
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
