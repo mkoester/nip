@@ -82,7 +82,7 @@ function withTranslations(event: RequestEvent<Partial<Record<string, string>>, s
 
 		const acceptedLang: string | undefined = languages.find((l) => {
 			const langId: string = l;
-			return Object.keys(config.translations).indexOf(langId) >= 0;
+			return Object.keys(config.translations ?? {}).indexOf(langId) >= 0;
 		});
 
 		if (!acceptedLang) {

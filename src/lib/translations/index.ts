@@ -1,11 +1,10 @@
-import i18n from 'sveltekit-i18n';
+import i18n, { type Config } from 'sveltekit-i18n';
 import { dev } from '$app/environment';
 import lang from './lang.json';
 
 export const defaultLocale = 'en';
 
-/** @type {import('sveltekit-i18n').Config} */
-export const config = {
+export const config: Config = {
 	log: {
 		level: dev ? 'warn' : 'error'
 	},
