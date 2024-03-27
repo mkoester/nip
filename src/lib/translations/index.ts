@@ -1,14 +1,14 @@
 import i18n from 'sveltekit-i18n';
-//import { dev } from '$app/environment';
+import { dev } from '$app/environment';
 import lang from './lang.json';
 
 export const defaultLocale = 'en';
 
 /** @type {import('sveltekit-i18n').Config} */
 export const config = {
-	/* 	log: {
+	log: {
 		level: dev ? 'warn' : 'error'
-	}, */
+	},
 	translations: {
 		en: { lang },
 		de: { lang }
@@ -24,7 +24,8 @@ export const config = {
 			key: 'header',
 			loader: async () => (await import('./de/header.json')).default
 		}
-	]
+	],
+	fallbackLocale: defaultLocale
 };
 
 export const {

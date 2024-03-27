@@ -6,7 +6,7 @@ import {
 	verifyRefreshToken
 } from '$lib/helper';
 import { JwtType, JwtVerifyResult, type User } from '$lib/types';
-import { config, loadTranslations } from '$lib/translations';
+import { config, defaultLocale } from '$lib/translations';
 import type { RequestEvent } from '@sveltejs/kit';
 
 // I followed https://www.youtube.com/watch?v=1mov2Piv97k
@@ -72,13 +72,11 @@ function handleJwt(
 }
 
 function withTranslations(event: RequestEvent<Partial<Record<string, string>>, string | null>) {
-	const { pathname } = event.url;
-	const langAccept = event.request.headers.get('accept-language');
+	const langAccept = event.request.headers.get('accept-language'); // TODO get via cookie if user overrides language settings
 
-	let lang: string;
 	if (!langAccept) {
 		console.log('DEBUG falling back to English, no accept-language HEADER');
-		lang = 'en';
+		event.locals.locale = defaultLocale;
 	} else {
 		const languages = langAccept.split(',').map((l) => l.trim().slice(0, 2));
 
@@ -91,27 +89,17 @@ function withTranslations(event: RequestEvent<Partial<Record<string, string>>, s
 			console.log(
 				'DEBUG falling back to English, accept-language HEADER is not supported:\n' + languages
 			);
-			lang = 'en';
+			event.locals.locale = defaultLocale;
 		} else {
-			lang = acceptedLang;
+			event.locals.locale = acceptedLang;
 		}
 	}
-
-	const translations = loadTranslations(lang, pathname);
-
-	if (!translations) {
-		console.log('ERROR while loading translations');
-		return Promise.resolve(event);
-	} else {
-		return translations.then(() => {
-			return event;
-		});
-	}
+	return event;
 }
 
 export async function handle({ event, resolve }) {
 	const verified: User | JwtVerifyResult = verifyAuthToken(event.cookies);
 	handleJwt(JwtType.auth, verified, event);
 
-	return withTranslations(event).then(resolve);
+	return resolve(withTranslations(event));
 }
