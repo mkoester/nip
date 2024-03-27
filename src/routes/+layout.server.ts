@@ -1,5 +1,5 @@
 import type { UserInformation } from '$lib/types';
 
-export async function load({ locals }): Promise<UserInformation> {
-	return { user: locals.user } satisfies UserInformation;
+export async function load({ locals }): Promise<UserInformation & { locale: string }> {
+	return { user: locals.user, locale: locals.locale };
 }

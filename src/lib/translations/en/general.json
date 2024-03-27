@@ -1,0 +1,15 @@
+{
+	"game": "Game",
+	"user": "User",
+	"participant": "Participant",
+	"participants": "Participants",
+	"question": "Question",
+	"questions": "Questions",
+	"answer": "Answer",
+	"answers": "Answers",
+	"my": "my",
+	"your": "your",
+	"make_a_choice": "make a choice",
+	"your_choice": "your choice",
+	"commit_choice": "commit choice"
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Game, QnA, UserInformation, Answer } from '$lib/types';
+	import { t } from '$lib/translations/index';
 	import AnswerCard from '$lib/ui/AnswerCard.svelte';
 	import ParticipantsTable from '$lib/ui/ParticipantsTable.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
@@ -20,16 +21,16 @@
 	<li class="crumb"><a class="anchor" href="/"><HomeIcon /></a></li>
 	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 	<li class="crumb">
-		<a class="anchor" href="/game/{$page.params.g_id}">Game {$page.params.g_id}</a>
+		<a class="anchor" href="/game/{$page.params.g_id}">{$t('general.game')} {$page.params.g_id}</a>
 	</li>
 	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 	<li class="crumb">
 		<a class="anchor" href="/game/{$page.params.g_id}/question/{$page.params.q_id}"
-			>Question {$page.params.q_id}</a
+			>{$t('general.question')} {$page.params.q_id}</a
 		>
 	</li>
 	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-	<li>Answers</li>
+	<li>{$t('general.answers')}</li>
 </ol>
 
 {#if debug}
@@ -38,11 +39,11 @@
 	</div>
 {/if}
 
-<h2 class="h2">Game {$page.params.g_id}</h2>
+<h2 class="h2">{$t('general.game')} {$page.params.g_id}</h2>
 
 <ParticipantsTable data={data.game.participants} />
 
-<h2 class="h2">Question {$page.params.q_id}</h2>
+<h2 class="h2">{$t('general.question')} {$page.params.q_id}</h2>
 
 <div class="grid place-content-center">
 	<QuestionCard data={data.question} />
@@ -54,7 +55,7 @@
 		<AnswerCard data={data.my_choice} />
 	</div>
 {:else}
-	<h3 class="h3">make a choice</h3>
+	<h3 class="h3">{$t('general.make_a_choice')}</h3>
 	<div
 		class="snap-x scroll-px-4 snap-mandatory scroll-smooth flex gap-4 overflow-x-auto px-4 py-10"
 	>
@@ -72,7 +73,7 @@
 	</div>
 
 	{#if chosenAnswer}
-		<h3 class="h3">your choice</h3>
+		<h3 class="h3">{$t('general.your_choice')}</h3>
 
 		{#if !chosenAnswer.my_answer}
 			<div class="grid place-content-center">
@@ -100,7 +101,7 @@
 							value={chosenAnswer.answer}
 						/>
 					</label>
-					<button class="btn">commit choice</button>
+					<button class="btn">{$t('general.commit_choice')}</button>
 				</form>
 			</div>
 		{/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Question } from '$lib/types';
+	import { t } from '$lib/translations/index';
 	export let data: Question;
 
 	let debug = true;
@@ -9,7 +10,7 @@
 	<h3 class="h3">
 		<span
 			class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone"
-			>Question</span
+			>{$t('general.question')}</span
 		>
 		{#if debug}<span class="text-xs font-thin">(id: {data.id}, lang: {data.lang})</span>{/if}
 	</h3>

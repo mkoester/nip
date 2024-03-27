@@ -1,0 +1,15 @@
+{
+	"game": "Spiel",
+	"user": "Benutzer",
+	"participant": "Teilnehmer",
+	"participants": "Teilnehmer",
+	"question": "Frage",
+	"questions": "Fragen",
+	"answer": "Antwort",
+	"answers": "Antworten",
+	"my": "Meine",
+	"your": "Deine",
+	"make_a_choice": "Triff eine Wahl",
+	"your_choice": "Deine Wahl",
+	"commit_choice": "Wahl bestätigen"
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Answer } from '$lib/types';
+	import { t } from '$lib/translations/index';
 	export let data: Answer;
 
 	let debug = false;
@@ -9,8 +10,8 @@
 	<h3 class="h3">
 		<span
 			class="bg-gradient-to-br from-pink-500 to-violet-500 bg-clip-text text-transparent box-decoration-clone"
-			>{#if data.my_answer}My
-			{/if}Answer</span
+			>{#if data.my_answer}{$t('general.my')}
+			{/if}{$t('general.answer')}</span
 		>
 		{#if debug}<span class="text-xs font-thin">(id: {data.id})</span>{/if}
 	</h3>

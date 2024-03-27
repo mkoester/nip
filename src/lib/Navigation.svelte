@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import { t } from '$lib/translations/index';
 
 	const drawerStore = getDrawerStore();
 
@@ -10,10 +11,10 @@
 
 <nav class="list-nav p-4">
 	<ul>
-		<li><a on:click={drawerClose} href="/">Home</a></li>
-		<li><a on:click={drawerClose} href="/user/games">My games</a></li>
+		<li><a on:click={drawerClose} href="/">{$t('navigation.home')}</a></li>
+		<li><a on:click={drawerClose} href="/user/games">{$t('navigation.my_games')}</a></li>
 		<li><a on:click={drawerClose} href="/about" class="line-through">About</a></li>
-		<li><a on:click={drawerClose} href="/user/login">Login</a></li>
+		<li><a on:click={drawerClose} href="/user/login">{$t('navigation.login')}</a></li>
 		<li><a on:click={drawerClose} href="/game/1">G1</a></li>
 		<li><a on:click={drawerClose} href="/game/5" class="line-through">G5</a></li>
 		<li><a on:click={drawerClose} href="/game/1/question/1">G1, Q1</a></li>
