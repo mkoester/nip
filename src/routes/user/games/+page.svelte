@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Game, UserInformation } from '$lib/types';
+	import { t } from '$lib/translations/index';
 
 	export let data: { games: Game[] } & UserInformation;
 
@@ -12,7 +13,9 @@
 	</div>
 {/if}
 
-<h2>User '{data.user?.username}' with id '{data.user?.id}'</h2>
+<h2 class="h2">{$t('navigation.my_games')}</h2>
+
+<h3 class="h3">User '{data.user?.username}' with id '{data.user?.id}'</h3>
 
 <div class="table-container">
 	<table class="table table-hover">

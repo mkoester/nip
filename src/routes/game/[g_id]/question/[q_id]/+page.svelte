@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Answer, Game, QnA, UserInformation } from '$lib/types';
+	import { t } from '$lib/translations/index';
 	import AnswerCard from '$lib/ui/AnswerCard.svelte';
 	import ParticipantsTable from '$lib/ui/ParticipantsTable.svelte';
 	import QuestionCard from '$lib/ui/QuestionCard.svelte';
@@ -16,10 +17,10 @@
 	<li class="crumb"><a class="anchor" href="/"><HomeIcon /></a></li>
 	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 	<li class="crumb">
-		<a class="anchor" href="/game/{$page.params.g_id}">Game {$page.params.g_id}</a>
+		<a class="anchor" href="/game/{$page.params.g_id}">{$t('general.game')} {$page.params.g_id}</a>
 	</li>
 	<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-	<li>Question {$page.params.q_id}</li>
+	<li>{$t('general.question')} {$page.params.q_id}</li>
 </ol>
 
 {#if debug}
@@ -28,17 +29,17 @@
 	</div>
 {/if}
 
-<h2 class="h2">Game {$page.params.g_id}</h2>
+<h2 class="h2">{$t('general.game')} {$page.params.g_id}</h2>
 
 <ParticipantsTable data={data.game.participants} />
 
-<h2 class="h2">Question {$page.params.q_id}</h2>
+<h2 class="h2">{$t('general.question')} {$page.params.q_id}</h2>
 
 <div class="grid place-content-center">
 	<QuestionCard data={data.question} />
 </div>
 
-<h2 class="h2">your answer</h2>
+<h2 class="h2">{$t('general.your')} {$t('general.answer')}</h2>
 
 {#if data.my_answer}
 	<div class="grid place-content-center">

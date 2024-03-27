@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
+	import { t } from '$lib/translations/index';
 	export let data: User[];
 </script>
 
-<h3 class="h3">Participants</h3>
+<h3 class="h3">{$t('general.participants')}</h3>
 
 <div class="table-container">
 	<table class="table table-hover">
