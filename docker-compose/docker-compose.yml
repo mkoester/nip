@@ -1,0 +1,15 @@
+name: nip
+
+services:
+  webserver:
+    build:
+      context: ..
+      tags:
+        - 'mkoester/nip:v0.1-SNAPSHOT'
+    env_file:
+      - ./docker-compose.webserver.env
+    volumes:
+      - $NIP_SQLITE_DATA_DIR:/app/data
+    restart: always
+    ports:
+      - "$NIP_NODE_PUBLIC_PORT:3000"

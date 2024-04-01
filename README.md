@@ -33,6 +33,24 @@ You can preview the production build with `pnpm preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
+## Deployment
+
+### docker compose
+
+#### docker compose with sqlite
+
+- clone this repository
+- go to the `docker-compose` directory inside the cloned repository, e.g. `cd nip/docker-compose`
+- create the necessary config files from the templates
+  - `cp .env.template .env`
+  - `cp docker-compose.webserver.env.template docker-compose.webserver.env`
+- edit the config files
+- create the data directory specified in `.env`, e.g. `mkdir -p $HOME/nip-data`
+- create the schema for `sqlite` (you would need to have the `sqlite3` cli tools installed on your system)
+  - e.g. `sqlite3 $HOME/nip-data/database.sqlite < ../sql/sqlite.sql`
+- start **nip**
+  - `docker compose up -d`
+
 ## The game (German)
 
 ### [Nobody is perfect](https://www.ravensburger.de/de-DE/pdp/26845) - Ein Spiel ab 14 Jahren, (offline) für 3-10 Spieler, von **Ravensburger**
