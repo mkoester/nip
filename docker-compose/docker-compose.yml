@@ -12,4 +12,4 @@ services:
       - $NIP_SQLITE_DATA_DIR:/app/data
     restart: always
     ports:
-      - "$NIP_NODE_PUBLIC_PORT:3000"
+      - '$NIP_NODE_PUBLIC_PORT:3000'
