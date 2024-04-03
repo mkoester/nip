@@ -19,6 +19,7 @@ export function getUserInformation(cookies: Cookies): UserInformation {
 	}
 }
 
+const langCookieName = 'lang';
 const authCookieName = 'authToken';
 const refreshCookieName = 'refreshToken';
 const secretAuth = '81a33490ec51c2e2d7a72ff094c4a062fc2a27648032c4658edd0ccb226e0da6'; // TODO get via env variable
@@ -89,4 +90,17 @@ export function deleteAuthToken(cookies: Cookies) {
 
 export function deleteRefreshToken(cookies: Cookies) {
 	cookies.delete(refreshCookieName, { path: '/' });
+}
+
+export function setLangToken(lang: string, cookies: Cookies): void {
+	cookies.set(langCookieName, lang, {
+		path: '/',
+		secure: !dev,
+		httpOnly: true,
+		maxAge: Number.MAX_SAFE_INTEGER
+	});
+}
+
+export function getLangToken(cookies: Cookies): string | undefined {
+	return cookies.get(langCookieName);
 }

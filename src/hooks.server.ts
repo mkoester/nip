@@ -1,6 +1,7 @@
 import {
 	deleteAuthToken,
 	deleteRefreshToken,
+	getLangToken,
 	setAuthToken,
 	verifyAuthToken,
 	verifyRefreshToken
@@ -78,28 +79,35 @@ function withTranslations(
 		opts?: ResolveOptions | undefined
 	) => MaybePromise<Response>
 ): MaybePromise<Response> {
-	const langAccept = event.request.headers.get('accept-language'); // TODO get via cookie if user overrides language settings
+	const cookieLang = getLangToken(event.cookies);
 
-	if (!langAccept) {
-		console.log('DEBUG falling back to English, no accept-language HEADER');
-		event.locals.locale = defaultLocale;
+	if (cookieLang) {
+		event.locals.locale = cookieLang;
 	} else {
-		const languages = langAccept.split(',').map((l) => l.trim().slice(0, 2));
+		const langAccept = event.request.headers.get('accept-language');
 
-		const acceptedLang: string | undefined = languages.find((l) => {
-			const langId: string = l;
-			return Object.keys(config.translations ?? {}).indexOf(langId) >= 0;
-		});
-
-		if (!acceptedLang) {
-			console.log(
-				'DEBUG falling back to English, accept-language HEADER is not supported:\n' + languages
-			);
+		if (!langAccept) {
+			console.log('DEBUG falling back to English, no accept-language HEADER');
 			event.locals.locale = defaultLocale;
 		} else {
-			event.locals.locale = acceptedLang;
+			const languages = langAccept.split(',').map((l) => l.trim().slice(0, 2));
+
+			const acceptedLang: string | undefined = languages.find((l) => {
+				const langId: string = l;
+				return Object.keys(config.translations ?? {}).indexOf(langId) >= 0;
+			});
+
+			if (!acceptedLang) {
+				console.log(
+					'DEBUG falling back to English, accept-language HEADER is not supported:\n' + languages
+				);
+				event.locals.locale = defaultLocale;
+			} else {
+				event.locals.locale = acceptedLang;
+			}
 		}
 	}
+
 	return resolve(event, {
 		transformPageChunk: ({ html }) => {
 			if (event.locals.locale != defaultLocale) {

@@ -9,7 +9,7 @@
 	} from '@skeletonlabs/skeleton';
 	import '../app.postcss';
 	import Navigation from '$lib/Navigation.svelte';
-	import { loadTranslations, t } from '$lib/translations/index';
+	import { loadTranslations, t, config } from '$lib/translations/index';
 	import type { UserInformation } from '$lib/types';
 	import { page } from '$app/stores';
 
@@ -21,6 +21,8 @@
 	}
 
 	export let data: UserInformation & { locale: string };
+	let form_language: HTMLFormElement;
+	let lang: string = data.locale;
 </script>
 
 <Drawer>
@@ -46,6 +48,21 @@
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+				{#if config.translations}
+					<form bind:this={form_language} method="POST" action="/?/language_change">
+						<input hidden type="text" name="curent_url" value={$page.url.pathname} />
+						<select
+							class="select"
+							name="lang"
+							bind:value={lang}
+							on:change={() => form_language.requestSubmit()}
+						>
+							{#each Object.keys(config.translations) as lang}
+								<option value={lang}>{lang}</option>
+							{/each}
+						</select>
+					</form>
+				{/if}
 				{#if data?.user}
 					<form method="POST">
 						<button formaction="/user?/logout"
