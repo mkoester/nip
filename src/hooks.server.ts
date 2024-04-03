@@ -7,7 +7,7 @@ import {
 } from '$lib/helper';
 import { JwtType, JwtVerifyResult, type User } from '$lib/types';
 import { config, defaultLocale } from '$lib/translations';
-import type { RequestEvent } from '@sveltejs/kit';
+import type { MaybePromise, RequestEvent, ResolveOptions } from '@sveltejs/kit';
 
 // I followed https://www.youtube.com/watch?v=1mov2Piv97k
 // this feels a bit off (sending both tokens all the time)
@@ -71,7 +71,13 @@ function handleJwt(
 	}
 }
 
-function withTranslations(event: RequestEvent<Partial<Record<string, string>>, string | null>) {
+function withTranslations(
+	event: RequestEvent<Partial<Record<string, string>>, string | null>,
+	resolve: (
+		event: RequestEvent<Partial<Record<string, string>>, string | null>,
+		opts?: ResolveOptions | undefined
+	) => MaybePromise<Response>
+): MaybePromise<Response> {
 	const langAccept = event.request.headers.get('accept-language'); // TODO get via cookie if user overrides language settings
 
 	if (!langAccept) {
@@ -94,12 +100,19 @@ function withTranslations(event: RequestEvent<Partial<Record<string, string>>, s
 			event.locals.locale = acceptedLang;
 		}
 	}
-	return event;
+	return resolve(event, {
+		transformPageChunk: ({ html }) => {
+			if (event.locals.locale != defaultLocale) {
+				return html.replace('<html lang="en"', `<html lang="${event.locals.locale}"`);
+			}
+			return html;
+		}
+	});
 }
 
-export async function handle({ event, resolve }) {
+export async function handle({ event, resolve }): Promise<Response> {
 	const verified: User | JwtVerifyResult = verifyAuthToken(event.cookies);
 	handleJwt(JwtType.auth, verified, event);
 
-	return resolve(withTranslations(event));
+	return withTranslations(event, resolve);
 }
